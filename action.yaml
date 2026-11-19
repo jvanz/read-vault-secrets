@@ -10,6 +10,10 @@ inputs:
     description: "the secrets to fetch from the vault server"
     required: false
     default: secret/data/github-actions/test status
+  role:
+    description: "the Vault role to log in with (default: github.event.repository.name)"
+    required: false
+    default: ${{ github.event.repository.name }}
 runs:
   using: composite
   steps:
@@ -20,6 +24,6 @@ runs:
         method: jwt
         url: ${{ inputs.address }}
         path: ${{ github.repository_owner }}
-        role: ${{ github.event.repository.name }}
+        role: ${{ inputs.role }}
         secrets: ${{ inputs.secrets }}
         exportEnv: true

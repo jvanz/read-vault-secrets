@@ -17,6 +17,12 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Check the Vault role
+      if: inputs.role == ''
+      shell: bash
+      run: |
+        echo "::error::The role input is empty. The event of some triggers, for example schedule, has no repository object. Set the role input to the name of the repository without the owner."
+        exit 1
     - name: Read Secrets from Vault"
       uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
       id: vault

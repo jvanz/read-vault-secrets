@@ -44,7 +44,7 @@ jobs:
 
 The action logs in to Vault with a role. The `role` input sets the role. The default value is `github.event.repository.name`. This is the name of the repository in the event data of the trigger that started the workflow.
 
-The event of some triggers, for example `schedule`, has no repository object. For these triggers, the default value is empty and the Vault login fails. If your workflow uses such a trigger, set the `role` input to the name of your repository without the owner. For example, for `rancher-eio/my-repository`, use `my-repository`:
+The event of some triggers, for example `schedule`, has no repository object. For these triggers, the default value is empty and the action stops with an error. If your workflow uses such a trigger, set the `role` input to the name of your repository without the owner. For example, for `rancher-eio/my-repository`, use `my-repository`:
 
 ```yaml
     steps:
